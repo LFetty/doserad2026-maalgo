@@ -1,0 +1,6 @@
+torch>=2.6
+numpy>=1.26
+PyYAML>=6.0
+h5py>=3.10
+tqdm>=4.66
+blosc2>=4.1.2

@@ -1,0 +1,58 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.env
+
+# --- editors ---
+.idea/
+.vscode/
+
+# --- run outputs (never committed) ---
+/out/
+/runs/
+/checkpoints/
+/wandb/
+/debug/
+/experiments/
+*.log
+*.out
+*.stats
+
+# --- data (supplied by the challenge, not redistributed here) ---
+/data/
+/test_data/
+*.mha
+*.b2nd
+*.dcm
+
+# --- build / submission artifacts ---
+*.tar.gz
+*.sif
+*.zip
+
+# --- large binaries, with the committed exceptions listed explicitly ---
+*.mat
+!example_data/pyradplan/protons_Generic.mat
+!example_data/mc_fit_smooth/lut_fast_3d_1e8_opt.mat
+!example_data/mc_fit_smooth/lut_fast_3d_1e9.mat
+!example_data/mc_fit_smooth/lut_fast_3d_1e9_opt.mat
+!model_ct/lut_fast_3d_1e8_opt.mat
+!model_mri/lut_fast_3d_1e8_opt.mat
+
+*.pt
+*.pth
+!model_ct/latest_ema.pt
+!model_mri/latest_ema.pt
+
+# The MR->synthetic-CT nnU-Net bundle (409 MB) lives on Hugging Face, not in git:
+#   https://huggingface.co/zimmeryWo/MRI-sCT_converter-DoseRAD2026
+# Fetch it into model_mri/mrtoct_bundle/ before building the MRI image.
+model_mri/mrtoct_bundle/

@@ -1,0 +1,20 @@
+{
+  "_comment": [
+    "Eager-FP16 fallback for the lean proton-CT image.",
+    "Dose checkpoint: exact e27 fixed-mask v2 EMA model from 2026-08-26,",
+    "checkpoint SHA-256 da31e0d29f767f60c8510a83f3bfc99f10b0907a4a6c1c3396341246971054c1.",
+    "Disables torch.compile and its health-startup warmup while retaining the",
+    "accuracy-validated FP16 correction, chunking, and lossless pipelined output path.",
+    "Correction batch 8 targets the challenge A10G with 24 GiB VRAM.",
+    "Tail padding is disabled because it only serves compiled fixed-batch graphs."
+  ],
+  "dense_hook_batch_items": 8,
+  "dense_hook_amp": true,
+  "max_beamlets_per_chunk": 128,
+  "output_compression_level": 1,
+  "output_write_workers": 2,
+  "pipeline_output_writes": true,
+  "compile_correction_model": false,
+  "warmup_on_load": false,
+  "pad_inference_batch": false
+}

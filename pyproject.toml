@@ -1,0 +1,66 @@
+
+[project]
+name = "pydose_rt"
+version = "1.1.0"
+description = "A differentiable radiation therapy dose calculation engine for automated treatment planning, built on PyTorch."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+authors = [
+    { name="Attila Simkó", email="gerd.heilemann@meduniwien.ac.at" },
+    { name="Gerd Heilemann", email="gerd.heilemann@meduniwien.ac.at" },
+    { name="Josef Lundman", email="josef.lundman@regionvasterbotten.se" },
+]
+dependencies = [
+    "torch>=2.6.0",
+    "numpy>=1.26.4",
+    "scipy>=1.11.1",
+    "scikit-image>=0.25.2",
+    "pydantic>=2.11.0",
+    "pydantic-settings>=2.11.0",
+    "matplotlib>=3.10.0",
+    "imageio>=2.37.0",
+    "pydicom>=2.4.4",
+    "rt-utils>=1.2.7",
+    "SimpleITK>=2.4.1",
+    "pymedphys[tests]>=0.41.0",
+    "llvmlite>=0.45.1",
+    "numba>=0.62.1",
+    "blosc2>=4.1.2",
+    "pyyaml>=6.0",
+    "wandb>=0.19.0"
+]
+[project.optional-dependencies]
+test=[
+    "pytest>=6.0.0",
+    "pytest-benchmark",
+    "pytest-cov>=6.2.1"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pydose_rt*"]
+exclude = ["pydose_rt.egg-info*"]
+
+[build-system]
+requires = ["setuptools>=68.2.2"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 120

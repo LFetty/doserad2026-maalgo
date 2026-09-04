@@ -1,0 +1,29 @@
+{
+  "_comment": [
+    "Runtime config for the DoseRAD2026 algorithm container. Lives in the model tarball so",
+    "parameters change with a ~9 MB re-upload instead of an 18.7 GB image rebuild.",
+    "Precedence: built-in default < this file < environment variable.",
+    "",
+    "MEASURED IN THE CONTAINER 2026-08-07 (eager, no padding, 3 invokes each, HTTP checked):",
+    "    items=4 -> 10.07 GiB reserved, steady invoke 7.29 s",
+    "    items=6 -> 14.15 GiB reserved, steady invoke 7.00 s   <- shipped",
+    "    items=8 -> HTTP 500, 'CUDA driver error: device not ready' on a 16 GB card.",
+    "Memory scales ~2.04 GiB per item, so items=8 projects to ~18.2 GiB: it should fit a",
+    "24 GB A10G, but the observed failure mode is a hard CUDA fault, not the graceful",
+    "dense-batch shrink -- oom_shrinks was 0. Not worth the risk for the ~0.3 s items=6",
+    "already banks. Larger batches ARE faster; 4 is not the safe default it looked like.",
+    "",
+    "compile_correction_model: FALSE deliberately. With it on, the correction model",
+    "recompiles inside the metered /invoke -- the synthetic warmup allocates its tensors",
+    "outside inference_mode, so the 'energy' tensor dispatch key set mismatches the real",
+    "call and the guard fails (confirmed via TORCH_LOGS=recompiles). Measured cost: health",
+    "93 s + first invoke 84.9 s against 9 s / 9.1 s eager. Do not enable until a container",
+    "run shows warmup followed by a first invoke at steady-state speed.",
+    "pad_inference_batch: FALSE -- it exists only to keep one batch shape for compile, and",
+    "with compile off it just pads the tail chunk with wasted rows."
+  ],
+  "dense_hook_batch_items": 6,
+  "max_beamlets_per_chunk": 32,
+  "compile_correction_model": false,
+  "pad_inference_batch": false
+}

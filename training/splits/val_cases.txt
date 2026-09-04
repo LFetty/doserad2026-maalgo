@@ -1,0 +1,8 @@
+/data/proton/training/1ABB006
+/data/proton/training/1ABB011
+/data/proton/training/1ABB020
+/data/proton/training/1ABB021
+/data/proton/training/1THB002
+/data/proton/training/1THB008
+/data/proton/training/1THB011
+/data/proton/training/1THB016

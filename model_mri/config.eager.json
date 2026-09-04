@@ -1,0 +1,24 @@
+{
+  "_comment": [
+    "Eager-FP16 runtime for the lean proton-MRI image.",
+    "Dose checkpoint: exact e27 fixed-mask v2 model from 2026-08-26,",
+    "checkpoint SHA-256 da31e0d29f767f60c8510a83f3bfc99f10b0907a4a6c1c3396341246971054c1.",
+    "Disables torch.compile and its health-startup warmup while retaining the",
+    "FP16 dose correction and two-patch FP16 MRI-to-sCT forwards.",
+    "Patch batch 2 measured 1.50x faster than patch batch 1; larger batches did not improve it.",
+    "Tail padding is disabled because it only serves compiled fixed-batch graphs."
+  ],
+  "dense_hook_batch_items": 8,
+  "dense_hook_amp": true,
+  "max_beamlets_per_chunk": 128,
+  "output_compression_level": 1,
+  "output_write_workers": 2,
+  "pipeline_output_writes": true,
+  "compile_correction_model": false,
+  "warmup_on_load": false,
+  "pad_inference_batch": false,
+  "sct_inference_amp": true,
+  "sct_patch_batch_size": 2,
+  "sct_hu_min": -1024.0,
+  "sct_hu_max": 3071.0
+}

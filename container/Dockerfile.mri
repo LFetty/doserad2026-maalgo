@@ -1,0 +1,11 @@
+# Proton-MRI variant. Identical to the CT image except for the task selector, so it is
+# derived from it: ENV/LABEL are metadata-only, which means no new layers and no second
+# 44 GB unpack (a full rebuild costs ~10+ min of pure disk I/O for an identical rootfs).
+#   docker build -f container/Dockerfile.mri -t doserad-proton-mri:latest .
+# Requires doserad-proton-ct:latest to be built first.
+FROM doserad-proton-ct:latest
+
+ENV GC_TASK=proton_mri
+
+# LABELs are not inherited for the platform's purposes — restate it explicitly.
+LABEL org.grand-challenge.api-method="invoke"
